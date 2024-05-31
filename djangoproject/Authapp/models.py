@@ -1,15 +1,16 @@
 from django.db import models
 from django.utils import timezone
-# Create your models here.
 class userModel(models.Model):
-    USERS_TYPES=[
-        ('AD','ADMIN'),
-        ('US','USER'),
-        ('OW','OWNER')
-    ]
-    name=models.CharField(max_length=100)
-    password=models.CharField()
-    image=models.ImageField(upload_to='images/')
-    add_date=models.DateTimeField(default=timezone.now)
-    type=models.CharField(max_length=2,choices=USERS_TYPES)
+    username=models.CharField(max_length=100,null=True,blank=True)
+    image=models.ImageField(upload_to='Image/')
+    date_create=models.DateTimeField(default=timezone.now)
+    description=models.TextField(default='')
+    def __str__(self):
+        return self.username
+class Product(models.Model):
+    name=models.CharField(max_length=100,null=True,blank=True)
+    price=models.IntegerField()
+    stocks=models.IntegerField()
     
+    def __str__(self):
+        return self.name
